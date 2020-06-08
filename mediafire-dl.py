@@ -85,9 +85,9 @@ class MediafireDownloader:
                 # Folder is after #
                 folder_key = mediafire_link[hash_pos:]
             else:
-		folder_slug_end = mediafire_link.find('/', folder_slug_start)
-		if folder_slug_end < 0:
-			folder_slug_end = len(mediafire_link)
+                folder_slug_end = mediafire_link.find('/', folder_slug_start)
+                if folder_slug_end < 0:
+                        folder_slug_end = len(mediafire_link)
                 folder_key = mediafire_link[folder_slug_start:folder_slug_end]
             self.download_folder(folder_key, '')
 
