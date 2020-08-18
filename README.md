@@ -1,11 +1,11 @@
 Installation:
 
-    $ pip install bs4 requests tqdm
+    $ pip install bs4 requests tqdm lxml
     $ git clone https://github.com/mohamed-elsaka/mediafire-dl.git
 
 Usage:
 
-    python mediafire-dl.py mediafire_link_1 mediafire_link_2 mediafire_link_3 lxml
+    python mediafire-dl.py mediafire_link_1 mediafire_link_2 mediafire_link_3
 
 
 Add to PATH on Linux:
