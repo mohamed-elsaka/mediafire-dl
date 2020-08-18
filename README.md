@@ -5,14 +5,14 @@ Installation:
 
 Usage:
 
-    python mediafire-dl.py mediafire_link_1 mediafire_link_2 mediafire_link_3
+    python mediafire-dl.py mediafire_link_1 mediafire_link_2 mediafire_link_3 lxml
 
 
 Add to PATH on Linux:
 
     1. Open the terminal & Navigate to the folder containing mediafire-dl.py
     
-    2. $ sudo cp mediafire-dl.py /usr/bin/mediafire-dl.py
+    2. $ sudo cp mediafire-dl.py /usr/bin/mediafire-dl
     
     3. $ sudo chmod a+rx /usr/bin/mediafire-dl
     
