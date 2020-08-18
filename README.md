@@ -1,6 +1,6 @@
 Installation:
 
-    $ pip install bs4 requests tqdm
+    $ pip install bs4 requests tqdm lxml
     $ git clone https://github.com/mohamed-elsaka/mediafire-dl.git
 
 Usage:
@@ -12,7 +12,7 @@ Add to PATH on Linux:
 
     1. Open the terminal & Navigate to the folder containing mediafire-dl.py
     
-    2. $ sudo cp mediafire-dl.py /usr/bin/mediafire-dl.py
+    2. $ sudo cp mediafire-dl.py /usr/bin/mediafire-dl
     
     3. $ sudo chmod a+rx /usr/bin/mediafire-dl
     
