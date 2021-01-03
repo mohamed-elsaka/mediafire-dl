@@ -85,9 +85,9 @@ class MediafireDownloader:
                 # Folder is after #
                 folder_key = mediafire_link[hash_pos:]
             else:
-		folder_slug_end = mediafire_link.find('/', folder_slug_start)
-		if folder_slug_end < 0:
-			folder_slug_end = len(mediafire_link)
+                folder_slug_end = mediafire_link.find('/', folder_slug_start)
+                if folder_slug_end < 0:
+                    folder_slug_end = len(mediafire_link)
                 folder_key = mediafire_link[folder_slug_start:folder_slug_end]
             self.download_folder(folder_key, '')
 
@@ -105,14 +105,16 @@ class MediafireDownloader:
 
         # Get download element
         r_download_page = requests.get(self.dl_page_url)
-        soup_download_page = BeautifulSoup(r_download_page.text, 'lxml')
+        soup_download_page = BeautifulSoup(r_download_page.text, 'html.parser')
         download_link_element = soup_download_page.select_one('.download_link')
         download_link_element_str = str(download_link_element)
 
         # Get download link from download element
-        link_start = download_link_element_str.find('"http://') +1
+        link_start = download_link_element_str.find('"https://') +1
         link_end = download_link_element_str.find('";', link_start)
         self.dl_file_url = download_link_element_str[link_start:link_end]
+        print('Download url: ' + self.dl_file_url)
+        print('------------')
 
         # Get file_name & file_size from HTTP head request
         header_request = requests.head(self.dl_file_url)
@@ -132,6 +134,8 @@ class MediafireDownloader:
         #print('download link: ' + self.dl_file_url)
         #print('[' + str(self.dl_total_file_size) + ']' + 'File: ' + self.dl_file_name)
 
+        self.dl_existing_file_size = 0
+
         # If file already exist, resume. Otherwise create new file
         if os.path.exists(self.dl_file_full_path):
             output_file = open(self.dl_file_full_path, 'ab')
@@ -139,7 +143,7 @@ class MediafireDownloader:
         else:
             output_file = open(self.dl_file_full_path, 'wb')
 
-        if self.dl_existing_file_size == self.dl_total_file_size:
+        if self.dl_existing_file_size >= self.dl_total_file_size:
             print('File "' + str(os.path.join(parent, self.dl_file_name)) + '" Already downloaded.')
             print('-------------------------')
             time.sleep(2)
@@ -181,4 +185,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
