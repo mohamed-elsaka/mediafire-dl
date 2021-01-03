@@ -114,6 +114,7 @@ class MediafireDownloader:
         link_end = download_link_element_str.find('";', link_start)
         self.dl_file_url = download_link_element_str[link_start:link_end]
         print('Download url: ' + self.dl_file_url)
+        print('------------')
 
         # Get file_name & file_size from HTTP head request
         header_request = requests.head(self.dl_file_url)
@@ -133,6 +134,8 @@ class MediafireDownloader:
         #print('download link: ' + self.dl_file_url)
         #print('[' + str(self.dl_total_file_size) + ']' + 'File: ' + self.dl_file_name)
 
+        self.dl_existing_file_size = 0
+
         # If file already exist, resume. Otherwise create new file
         if os.path.exists(self.dl_file_full_path):
             output_file = open(self.dl_file_full_path, 'ab')
@@ -140,7 +143,7 @@ class MediafireDownloader:
         else:
             output_file = open(self.dl_file_full_path, 'wb')
 
-        if self.dl_existing_file_size == self.dl_total_file_size:
+        if self.dl_existing_file_size >= self.dl_total_file_size:
             print('File "' + str(os.path.join(parent, self.dl_file_name)) + '" Already downloaded.')
             print('-------------------------')
             time.sleep(2)
